@@ -1,4 +1,5 @@
 #include <stdio.h>
+/* Test */
 
 int main(int argc, char *argv[])
 {
