@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+Instruction:
+#0.) Vulcan execution
+#1.) gcc -o insert insertionSort.c
+#2.) ./insert
+#3.) Read the printf statements and follow
+ */
+
 int main(int argc, char **argv)
 {
     int input, i, inputTwo;
