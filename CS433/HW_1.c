@@ -33,10 +33,13 @@ int main(int argc, char *argv[])
     }
     if (argc >= 2)
     {
-        /* second part */
         while ((n = getline(&line, &maxlen, stdin)) > 0)
         {
-            printf("Line read:\n[%s]", line);
+            for (keyword = 1; keyword < argc; keyword++)
+            {
+                char *str = line;
+                find_str(str, argv[keyword]);
+            }
         }
         free(line);
 
