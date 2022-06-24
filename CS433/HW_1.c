@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Struc */
+struct keyword
+{
+    char *keyword;
+    int counter;
+};
+
 /* Contains find_Str */
 int find_str(char const *str, char const *substr)
 {
@@ -26,7 +33,40 @@ int main(int argc, char *argv[])
     char *line = NULL;
     size_t maxlen = 0;
     ssize_t n;
+    /* struct */
+    struct keyword list[50];
+    int t;
+    for (t = 0; t < argc; t++)
+    {
+        list[t].keyword = argv[t + 1];
+        list[t].counter = 0;
+    }
+    /* NEW WAY */
+    while ((n = getline(&line, &maxlen, stdin)) > 0)
+    {
+        char *token = strtok(line, " ");
+        while (token != NULL)
+        {
+            int i;
+            for (i = 0; i < argc; i++)
+            {
+                if (strcmp(token, list[i].keyword) == 0)
+                {
+                    list[i].counter = counter++;
+                }
+                token = strtok(NULL, " ");
+            }
+        }
+    }
+    int i;
+    for (i = 0; i < argc; i++)
+    {
+        printf("%s: %d", list[i].keyword, list[i].counter);
+    }
 
+    /* OLD CODE */
+
+    /*
     if (argc == 1)
     {
         printf("There are no extra Command Line Arguments. \n");
@@ -55,5 +95,6 @@ int main(int argc, char *argv[])
             maxlen = 0;
         }
     }
+    */
     return 0;
 }
