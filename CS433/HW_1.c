@@ -34,9 +34,9 @@ int main(int argc, char *argv[])
     size_t maxlen = 0;
     ssize_t n;
     /* struct */
-    struct keyword list[50];
+    struct keyword list[argc + 1];
     int t;
-    for (t = 0; t < argc; t++)
+    for (t = 0; t < argc - 1; t++)
     {
         list[t].keyword = argv[t + 1];
         list[t].counter = 0;
@@ -48,11 +48,11 @@ int main(int argc, char *argv[])
         while (token != NULL)
         {
             int i;
-            for (i = 0; i < argc; i++)
+            for (i = 0; i < argc - 1; i++)
             {
                 if (strcmp(token, list[i].keyword) == 0)
                 {
-                    list[i].counter = counter++;
+                    list[i].counter = ++list[i].counter;
                 }
                 token = strtok(NULL, " ");
             }
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     int i;
     for (i = 0; i < argc; i++)
     {
-        printf("%s: %d", list[i].keyword, list[i].counter);
+        printf("%s: %d\n", list[i].keyword, list[i].counter);
     }
 
     /* OLD CODE */
