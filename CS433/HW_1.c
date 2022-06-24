@@ -3,16 +3,16 @@
 #include <stdlib.h>
 
 /* Contains find_Str */
-void find_str(char const *str, char const *substr)
+int find_str(char const *str, char const *substr)
 {
     char *pos = strstr(str, substr);
     if (pos)
     {
-        printf("found the string '%s' in '%s' at position: %ld\n", substr, str, pos - str);
+        return 1;
     }
     else
     {
-        printf("the string '%s' was not found in '%s'\n", substr, str);
+        return 0;
     }
 }
 
@@ -33,23 +33,26 @@ int main(int argc, char *argv[])
     }
     if (argc >= 2)
     {
-        while ((n = getline(&line, &maxlen, stdin)) > 0)
-        {
-            for (keyword = 1; keyword < argc; keyword++)
-            {
-                char *str = line;
-                find_str(str, argv[keyword]);
-            }
-        }
-        free(line);
-
-        /* first part */
-        printf("Number of arguments passed: %d. \n", argc);
-        printf("Here is the number of times each keyword appears: \n");
         for (keyword = 1; keyword < argc; keyword++)
         {
-            /* if keyword then this function here */
+            while ((n = getline(&line, &maxlen, stdin)) > 0)
+            {
+                char *token = strtok(line, " ");
+                while (token)
+                {
+                    if (find_str(token, argv[keyword]) == 1)
+                    {
+                        counter++;
+                    }
+                    token = strtok(NULL, " ");
+                }
+            }
             printf("%s: %d \n", argv[keyword], counter);
+            counter = 0;
+            free(line);
+            line = NULL;
+            n = 0;
+            maxlen = 0;
         }
     }
     return 0;
