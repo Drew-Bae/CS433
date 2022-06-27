@@ -2,6 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Comment */
+/*
+To compile just cd into the CS433 folder.
+Cd into the CS433 folder again B/c there is another folder named CS433 inside the CS433 folder.
+gcc -o HW1 HW_1.c to compile
+./HW1 it was the < tintTale.txt to run the program
+Nice finished!
+*/
+
 /* Struc */
 struct keyword
 {
@@ -34,6 +43,7 @@ int main(int argc, char *argv[])
     size_t maxlen = 0;
     ssize_t n;
     /* struct */
+    /* malloc() */
     struct keyword list[argc + 1];
     int t;
     for (t = 0; t < argc - 1; t++)
